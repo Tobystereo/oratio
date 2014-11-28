@@ -1,0 +1,16 @@
+<template name="nav">
+	{{#if logged_in}}
+		<div id="login_bar">
+			{{> loginButtons align="right"}}
+		</div>
+	{{else}}
+		{{> nav_loggedout}}
+	{{/if}}
+</template>
+
+<template name="nav_loggedout">
+	<div class="login_bar_homepage">
+		{{> loginButtons}}
+	</div>
+</template>
+

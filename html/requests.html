@@ -1,0 +1,34 @@
+<template name="requests">
+		<h2>Prayer Requests ({{numberofrequests}})</h2>
+		<textarea id="new_request" placeholder="New Prayer Request"></textarea>
+		<button id="add_new_request">Add</button>
+		<ul class="request-list">
+		{{#each request}}
+			<li>
+				<div class="request" data-status="{{status}}">
+					<div class="metadata">{{status}} &mdash; {{creationDate}}</div>
+					<label for="{{_id}}">
+						<p>{{text}}</p>
+					</label>
+					<button class="deleteRequest" data-id="{{_id}}">Delete</button>
+					{{#if unanswered}}
+						<button class="markRequestAnswered" data-id="{{_id}}">Mark Answered</button>
+					{{else}}
+						<button class="markRequestUnanswered" data-id="{{_id}}">Mark Unanswered</button>
+					{{/if}}
+				</div>
+			</li>	
+		{{/each}}
+		</ul>
+</template>
+
+<template name="request">
+	<p>{{_id}}</p>
+	<p>{{text}}</p>
+	<div class="request">
+		<label for="{{_id}}">
+			<p>{{text}}</p>
+			<input type="checkbox" name="{{_id}}">
+		</label>
+	</div>
+</template>

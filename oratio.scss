@@ -1,0 +1,208 @@
+@import "variables";
+
+*, *:before, *:after {
+    box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+} 
+
+body {
+    background-color: $lighter;
+    font-family: 'Fira Sans', sans-serif;
+    color: $light;
+    padding: 0;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, strong {
+    font-weight: 700;
+}
+
+.hero {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: url('assets/img/background_small.jpg') no-repeat center center fixed;
+    background-size: cover;
+    -webkit-filter: blur(1vh);
+    -moz-filter: blur(1vh);
+    -o-filter: blur(1vh);
+    -ms-filter: blur(1vh);
+    filter: blur(1vh);
+}
+
+.logo_homepage {
+    max-width: 90vw;
+    height: 90vh;
+    display: block;
+    margin: 10vh auto 0;
+}
+
+@media all and (min-width: 50em) {
+    .formfields {
+        display: block;
+        margin: 3vh auto 0 !important;
+    }
+    
+    .logo_homepage {
+        margin-top: 15vh;
+        width: 80vw;
+        max-height: 50vh;
+    }
+}
+
+.footnote, .footnote a {
+    color: rgba(156, 150, 164, 1);
+    text-align: center; 
+    clear:left; 
+    font-size:14px; 
+    font-weight: normal;
+}
+
+
+
+@mixin button($color: $primary) {
+    // Ghost Button Style
+    background: none;
+    border: $border solid $color;
+    padding: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+
+@mixin transition {
+    -webkit-transition: all 0.3s 0s ease-out;  /* Saf3.2+, Chrome */
+    -moz-transition: all 0.3s 0s ease-out;  /* FF4+ */
+    -ms-transition: all 0.3s 0s ease-out;  /* IE10? */
+    -o-transition: all 0.3s 0s ease-out;  /* Opera 10.5+ */
+    transition: all 0.3s 0s ease-out; 
+}
+
+
+.login_bar_homepage {
+    width: 22.5rem;
+    max-width: 50vw;
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+
+    .login-link-text,
+    .login-close-text {
+        display: none;
+    }
+
+    #login-buttons-facebook {
+        @include button;
+        border-color: $facebook;
+        color: $facebook;
+        @include transition;
+
+        &:hover {
+            background-color: $facebook;
+            color: $light;
+        }
+    }
+}
+
+.homepage {
+    overflow-y: scroll !important;
+}
+
+.nav {
+    background-color: black;
+}
+
+// Request Input
+
+#new_request {
+    border: none;
+    background-color: $lightest;
+    @extend %card;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    resize: none;
+    height: $baseline * 5;
+    margin-bottom: 0 !important;
+    outline: none;
+}
+
+#add_new_request {
+    @include transition;
+    @extend %card;
+    border: none;
+    background-color: $success !important;
+    color: $lightest !important;
+    font-size: 1rem;
+    outline: none;
+    &:focus, &:hover {
+        background-color: lighten($success, 5) !important;
+        color: $lightest !important;
+    }
+    &:active {
+        background-color: darken($success, 5) !important;
+    }
+}
+
+// Request List
+
+.request-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.request {
+    @include transition;
+
+    @extend %card;
+
+    &[data-status=unanswered] {
+        border-left: $padding/2 solid $darker;
+    }
+
+    &[data-status=answered] {
+        border-left: $padding/2 solid $success;
+    }
+
+    & .metadata {
+        @include transition;
+        font-size: .6rem;
+        font-weight: 200;
+        color: $lightest;
+    }
+
+    button {
+        @include transition;
+        opacity: 0;
+    }
+
+    &:hover {
+        .metadata {
+            color: $lighter;            
+        }
+
+        button {
+            opacity: 1;
+        }
+    }
+}
+
+
+%card {
+    display: block;
+    background-color: $lightest;
+    margin: 0 $baseline/2 $baseline;
+    padding: $padding/2 $padding;
+    color: $light;
+    width: 90vw;
+    float: left;
+
+    @media #{$media} and (min-width: $breakpoint-50) {
+        width: 15rem;
+    }
+}
+
